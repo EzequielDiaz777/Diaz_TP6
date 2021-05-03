@@ -19,6 +19,9 @@ public class Diaz_TP6 {
 //        lista.buscarCliente("2657312733");
         lista.buscarCliente("1132185230");
         lista.buscarCliente("1132185326");
+        if(lista.borrarCliente("34229421")==null){
+              System.out.println("Este cliente no existe en la lista.");
+          }
 //        lista.buscarCliente("2657312732");
 //        lista.buscarCliente("2657312736");
 //        lista.buscarCliente("1159481383");
@@ -46,5 +49,8 @@ public class Diaz_TP6 {
 //        lista.buscarClientes("La Punta");
 //        lista.buscarClientes("CABA");
 //        lista.buscarTelefono("Diaz");
+          if(lista.borrarCliente("34229421")!=null){
+              System.out.println("Este cliente no existe en la lista.");
+          }
     }
 }

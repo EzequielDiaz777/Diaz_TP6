@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package Dias_TP6.vista;
-import Diaz_TP6.entidad.Cliente;
 import Diaz_TP6.entidad.Directorio;
-import java.util.Set;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 /**
  *
@@ -21,8 +20,24 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
     public viewBuscarCliente(Directorio directorio) {
         initComponents();
         this.directorio = directorio;
+        this.requestFocus();
+        jtfTelefono.requestFocus();
+    }
+    
+    public void mensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 
+    public void buscarCliente(){
+        String telefono = jtfTelefono.getText();
+        jtfNombre.setText(directorio.buscarCliente(telefono).getNombre());
+        jtfApellido.setText(directorio.buscarCliente(telefono).getApellido());
+        jtfCiudad.setText(directorio.buscarCliente(telefono).getCiudad());
+        jtfDNI.setText(directorio.buscarCliente(telefono).getDni());
+        jtfTelefono.setText("");
+        jtfTelefono.requestFocus();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +61,9 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
         jlDNI = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
 
+        setTitle("Busqueda de clientes");
+        setNextFocusableComponent(jtfTelefono);
+
         jtfApellido.setEditable(false);
 
         jlTelefono.setText("Telefono:");
@@ -57,6 +75,14 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
         jtfTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfTelefonoActionPerformed(evt);
+            }
+        });
+        jtfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfTelefonoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfTelefonoKeyTyped(evt);
             }
         });
 
@@ -75,6 +101,11 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
+        jbSalir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbSalirKeyPressed(evt);
+            }
+        });
 
         jlBuscarCliente.setText("Busqueda de Clientes");
 
@@ -90,6 +121,13 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
         jlDNI.setText("DNI");
 
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        jbBuscar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        jbBuscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        jbBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbBuscarMouseClicked(evt);
+            }
+        });
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -98,6 +136,9 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
         jbBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jbBuscarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jbBuscarKeyTyped(evt);
             }
         });
 
@@ -115,9 +156,9 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jlBuscarCliente))
-                        .addGap(29, 29, 29)
+                        .addGap(18, 18, 18)
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -176,7 +217,7 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18))
         );
 
-        pack();
+        setBounds(100, 50, 450, 360);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTelefonoActionPerformed
@@ -196,21 +237,63 @@ public class viewBuscarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirMouseClicked
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        try {
-            Long t=Long.parseLong(jtfTelefono.getText());
-            String telefono = jtfTelefono.getText();
-            jtfNombre.setText(directorio.buscarCliente(telefono).getNombre());
-            jtfApellido.setText(directorio.buscarCliente(telefono).getApellido());
-            jtfCiudad.setText(directorio.buscarCliente(telefono).getCiudad());
-            jtfDNI.setText(directorio.buscarCliente(telefono).getDni());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this,"Telefono no valido.");
-        }
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbBuscarKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtfTelefono.getText().trim().length() == 0) {
+                mensaje("Faltan rellenar campos.");
+                jtfTelefono.requestFocus();
+            } else if(directorio.buscarCliente(jtfTelefono.getText())==null){
+                mensaje("El cliente con el telefono " + jtfTelefono.getText() + " no existe en el directorio.");
+            } else {
+                buscarCliente();
+            }
+        }
     }//GEN-LAST:event_jbBuscarKeyPressed
+
+    private void jtfTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtfTelefono.getText().trim().length() == 0) {
+                mensaje("Faltan rellenar campos.");
+                jtfTelefono.requestFocus();
+            } else if(directorio.buscarCliente(jtfTelefono.getText())==null){
+                mensaje("El cliente con el telefono " + jtfTelefono.getText() + " no existe en el directorio.");
+            } else {
+                buscarCliente();
+            }
+        }
+    }//GEN-LAST:event_jtfTelefonoKeyPressed
+
+    private void jtfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfTelefonoKeyTyped
+
+    private void jbBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbBuscarKeyTyped
+        
+    }//GEN-LAST:event_jbBuscarKeyTyped
+
+    private void jbSalirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbSalirKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dispose();
+        }
+    }//GEN-LAST:event_jbSalirKeyPressed
+
+    private void jbBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBuscarMouseClicked
+        if (jtfTelefono.getText().trim().length() == 0) {
+                mensaje("Faltan rellenar campos.");
+                jtfTelefono.requestFocus();
+            } else if(directorio.buscarCliente(jtfTelefono.getText())==null){
+                mensaje("El cliente con el telefono " + jtfTelefono.getText() + " no existe en el directorio.");
+            } else {
+                buscarCliente();
+            }
+    }//GEN-LAST:event_jbBuscarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

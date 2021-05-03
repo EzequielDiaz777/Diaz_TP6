@@ -31,14 +31,18 @@ public class viewMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jmbMenu = new javax.swing.JMenuBar();
         jmEditarCliente = new javax.swing.JMenu();
         jmiAgregarCliente = new javax.swing.JMenuItem();
         jmiBorrarCliente = new javax.swing.JMenuItem();
         jmBuscarCliente = new javax.swing.JMenu();
+        jmiBuscarClientePorTelefono = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Directorio de telefonos");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -58,6 +62,8 @@ public class viewMenu extends javax.swing.JFrame {
             }
         });
 
+        jmiAgregarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        jmiAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
         jmiAgregarCliente.setText("Agregar cliente");
         jmiAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +72,8 @@ public class viewMenu extends javax.swing.JFrame {
         });
         jmEditarCliente.add(jmiAgregarCliente);
 
+        jmiBorrarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        jmiBorrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
         jmiBorrarCliente.setText("Borrar cliente");
         jmiBorrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +82,7 @@ public class viewMenu extends javax.swing.JFrame {
         });
         jmEditarCliente.add(jmiBorrarCliente);
 
-        jMenuBar1.add(jmEditarCliente);
+        jmbMenu.add(jmEditarCliente);
 
         jmBuscarCliente.setText("Buscar cliente");
         jmBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,7 +95,23 @@ public class viewMenu extends javax.swing.JFrame {
                 jmBuscarClienteActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jmBuscarCliente);
+
+        jmiBuscarClientePorTelefono.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jmiBuscarClientePorTelefono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa miniatura.png"))); // NOI18N
+        jmiBuscarClientePorTelefono.setText("Buscar cliente por telefono");
+        jmiBuscarClientePorTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmiBuscarClientePorTelefonoMouseClicked(evt);
+            }
+        });
+        jmiBuscarClientePorTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBuscarClientePorTelefonoActionPerformed(evt);
+            }
+        });
+        jmBuscarCliente.add(jmiBuscarClientePorTelefono);
+
+        jmbMenu.add(jmBuscarCliente);
 
         jmSalir.setText("Salir");
         jmSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,9 +124,19 @@ public class viewMenu extends javax.swing.JFrame {
                 jmSalirActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jmSalir);
 
-        setJMenuBar(jMenuBar1);
+        jmiSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jmSalir.add(jmiSalir);
+
+        jmbMenu.add(jmSalir);
+
+        setJMenuBar(jmbMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +150,7 @@ public class viewMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarClienteActionPerformed
@@ -151,18 +186,30 @@ public class viewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
-        dispose();
+       
     }//GEN-LAST:event_jmSalirMouseClicked
 
     private void jmBuscarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmBuscarClienteMouseClicked
+        
+    }//GEN-LAST:event_jmBuscarClienteMouseClicked
+
+    private void jmiBuscarClientePorTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmiBuscarClientePorTelefonoMouseClicked
+
+    }//GEN-LAST:event_jmiBuscarClientePorTelefonoMouseClicked
+
+    private void jmiBuscarClientePorTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarClientePorTelefonoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        
+
         viewBuscarCliente buscarCliente = new viewBuscarCliente(directorio);
         buscarCliente.setVisible(true);
         escritorio.add(buscarCliente);
         escritorio.moveToFront(buscarCliente);
-    }//GEN-LAST:event_jmBuscarClienteMouseClicked
+    }//GEN-LAST:event_jmiBuscarClientePorTelefonoActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,11 +248,13 @@ public class viewMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmBuscarCliente;
     private javax.swing.JMenu jmEditarCliente;
     private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenuBar jmbMenu;
     private javax.swing.JMenuItem jmiAgregarCliente;
     private javax.swing.JMenuItem jmiBorrarCliente;
+    private javax.swing.JMenuItem jmiBuscarClientePorTelefono;
+    private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }

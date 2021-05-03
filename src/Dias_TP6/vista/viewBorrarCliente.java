@@ -7,6 +7,7 @@ package Dias_TP6.vista;
 
 import Diaz_TP6.entidad.Cliente;
 import Diaz_TP6.entidad.Directorio;
+import java.awt.event.KeyEvent;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author long_
  */
 public class viewBorrarCliente extends javax.swing.JInternalFrame {
-
     Directorio directorio;
 
     /**
@@ -25,9 +25,44 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
      */
     public viewBorrarCliente(Directorio directorio) {
         initComponents();
+        this.requestFocus();
+        jtfDNI.requestFocus();
         this.directorio = directorio;
     }
 
+    public void mensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+    
+    public void borrarCliente(){
+        int i = JOptionPane.showConfirmDialog(null, "Esta a punto de eliminar el cliente con el DNI " + jtfDNI.getText() + ", ¿Esta seguro de eliminarlo? ", "Reponder", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                switch (i) {
+                    case 0:
+                        try{
+                        String DNI = jtfDNI.getText();
+                        TreeMap<String,Cliente> cliente = directorio.borrarCliente(DNI);
+                        jtfNombre.setText(cliente.get(cliente.firstKey()).getNombre());
+                        jtfApellido.setText(cliente.get(cliente.firstKey()).getApellido());
+                        jtfCiudad.setText(cliente.get(cliente.firstKey()).getCiudad());
+                        jtfTelefono.setText(cliente.keySet().toString());
+                        jtfNombre.setText(cliente.get(cliente.firstKey()).getNombre());
+                        jtfApellido.setText(cliente.get(cliente.firstKey()).getApellido());
+                        jtfCiudad.setText(cliente.get(cliente.firstKey()).getCiudad());
+                        jtfTelefono.setText(cliente.keySet().toString());
+                        limpiar();
+                        jtfDNI.requestFocus();
+                        }catch(NullPointerException npe){
+                            mensaje("El cliente con el DNI " + jtfDNI.getText() + " no existe en el directorio.");
+                            jtfDNI.requestFocus();
+                        }
+                        break;
+                    case 1:
+                        break;
+                }
+    }
+    public void limpiar(){
+        jtfDNI.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +85,8 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
         jtfDNI = new javax.swing.JTextField();
         jbBorrar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+
+        setTitle("Borrar cliente");
 
         jlBorrarCliente.setText("Borrar cliente");
 
@@ -81,8 +118,21 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
                 jtfDNIActionPerformed(evt);
             }
         });
+        jtfDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfDNIKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDNIKeyTyped(evt);
+            }
+        });
 
         jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        jbBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbBorrarMouseClicked(evt);
+            }
+        });
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBorrarActionPerformed(evt);
@@ -92,12 +142,20 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jbBorrarKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jbBorrarKeyTyped(evt);
+            }
         });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+        jbSalir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbSalirKeyPressed(evt);
             }
         });
 
@@ -172,7 +230,7 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setBounds(100, 50, 450, 360);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTelefonoActionPerformed
@@ -184,19 +242,12 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDNIActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-    try {
-            Long t = Long.parseLong(jtfDNI.getText());
-            String DNI = jtfDNI.getText();
-            TreeMap<String, Cliente> clientes = directorio.borrarCliente(DNI);
-            String aux = clientes.firstKey();
-            String tele = clientes.keySet().toString();
-            jtfNombre.setText(clientes.get(aux).getNombre());
-            jtfApellido.setText(clientes.get(aux).getApellido());
-            jtfCiudad.setText(clientes.get(aux).getCiudad());
-            jtfTelefono.setText(tele);
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this,"Telefono no valido.");
-        }
+    if (jtfDNI.getText().trim().length() == 0) {
+        mensaje("Faltan rellenar campos.");
+        jtfDNI.requestFocus();
+    } else {
+        borrarCliente();
+    }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -204,8 +255,53 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBorrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbBorrarKeyPressed
-        // TODO add your handling code here:
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    if (jtfDNI.getText().trim().length() == 0) {
+        mensaje("Faltan rellenar campos.");
+        jtfDNI.requestFocus();
+    } else {
+        borrarCliente();
+    }
+    }
     }//GEN-LAST:event_jbBorrarKeyPressed
+
+    private void jbBorrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbBorrarKeyTyped
+        
+    }//GEN-LAST:event_jbBorrarKeyTyped
+
+    private void jtfDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDNIKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    if (jtfDNI.getText().trim().length() == 0) {
+        mensaje("Faltan rellenar campos.");
+        jtfDNI.requestFocus();
+    } else {
+        borrarCliente();
+    }
+    }
+    }//GEN-LAST:event_jtfDNIKeyPressed
+
+    private void jtfDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDNIKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfDNIKeyTyped
+
+    private void jbSalirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbSalirKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dispose();
+        }
+    }//GEN-LAST:event_jbSalirKeyPressed
+
+    private void jbBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBorrarMouseClicked
+    if (jtfDNI.getText().trim().length() == 0) {
+        mensaje("Faltan rellenar campos.");
+        jtfDNI.requestFocus();
+    } else {
+        borrarCliente();
+    }
+    }//GEN-LAST:event_jbBorrarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

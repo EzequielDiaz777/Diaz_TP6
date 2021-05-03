@@ -18,10 +18,13 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
     Directorio directorio;
     /**
      * Creates new form viewAgCl
+     * @param directorio
      */
     public viewAgregarCliente(Directorio directorio) {
         initComponents();
         this.directorio = directorio;
+        this.requestFocus();
+        jtfNombre.requestFocus();
     }
 
     public void mensaje(String texto) {
@@ -29,9 +32,6 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
     }
     
     public void agregarCliente(){
-        try {
-            Long d=Long.parseLong(jtfDNI.getText());
-            Long t=Long.parseLong(jtfTelefono.getText());
             String nombre = jtfNombre.getText();
             String apellido = jtfApellido.getText();
             String DNI = jtfDNI.getText();
@@ -50,13 +50,18 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
             jtfCiudad.setText("");
             jtfDireccion.setText("");
             jtfTelefono.setText("");
-        }
-        } catch (NumberFormatException nfe) {
-            mensaje("DNI o telefono no valido.");
             jtfNombre.requestFocus();
         }
     }
     
+    public void limpiar(){
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfDNI.setText("");
+        jtfCiudad.setText("");
+        jtfDireccion.setText("");
+        jtfTelefono.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,12 +88,23 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
         jlDireccion = new javax.swing.JLabel();
         jbAgregar = new javax.swing.JButton();
 
+        setTitle("Agregar cliente");
+        setMaximumSize(getMaximumSize());
+        setMinimumSize(new java.awt.Dimension(450, 360));
+        setNextFocusableComponent(jtfNombre);
+        setVisible(true);
+
         jlCiudad.setText("Ciudad:");
 
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);
+            }
+        });
+        jbLimpiar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbLimpiarKeyPressed(evt);
             }
         });
 
@@ -98,6 +114,11 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+        jbSalir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbSalirKeyPressed(evt);
             }
         });
 
@@ -129,6 +150,9 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
         jtfDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfDNIKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDNIKeyTyped(evt);
             }
         });
 
@@ -166,6 +190,9 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfTelefonoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfTelefonoKeyTyped(evt);
+            }
         });
 
         jlDireccion.setText("Dirección:");
@@ -179,6 +206,11 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
+            }
+        });
+        jbAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbAgregarKeyPressed(evt);
             }
         });
 
@@ -254,10 +286,10 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
                     .addComponent(jbAgregar)
                     .addComponent(jbLimpiar)
                     .addComponent(jbSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        pack();
+        setBounds(100, 50, 450, 385);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
@@ -269,32 +301,11 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDireccionActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        try {
-            Long d=Long.parseLong(jtfDNI.getText());
-            Long t=Long.parseLong(jtfTelefono.getText());
-            String nombre = jtfNombre.getText();
-            String apellido = jtfApellido.getText();
-            String DNI = jtfDNI.getText();
-            String ciudad = jtfCiudad.getText();
-            String direccion = jtfDireccion.getText();
-            String telefono = jtfTelefono.getText();
-            Cliente cliente = new Cliente(nombre, apellido, DNI, direccion, ciudad);
-        if(directorio.buscarCliente(telefono)!=null){
-            mensaje("Este cliente ya se encuentra agregado.");
-        } else {
-            directorio.agregarCliente(telefono, cliente);
-            mensaje("Cliente agregado existosamente.");
-            jtfNombre.setText("");
-            jtfApellido.setText("");
-            jtfDNI.setText("");
-            jtfCiudad.setText("");
-            jtfDireccion.setText("");
-            jtfTelefono.setText("");
-        }
-        } catch (NumberFormatException nfe) {
-            mensaje("DNI o telefono no valido.");
-            jtfNombre.requestFocus();
-        }
+        if (jtfNombre.getText().trim().length() == 0 || jtfApellido.getText().trim().length() == 0 || jtfDNI.getText().trim().length() == 0 || jtfDireccion.getText().trim().length() == 0 || jtfCiudad.getText().trim().length() == 0 || jtfTelefono.getText().trim().length() == 0) {
+                mensaje("Faltan rellenar campos.");
+            } else {
+                agregarCliente();
+            }
     }//GEN-LAST:event_jbAgregarActionPerformed
    
     private void jtfDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfDNIFocusLost
@@ -310,12 +321,7 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfTelefonoFocusLost
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        jtfNombre.setText("");
-        jtfApellido.setText("");
-        jtfDNI.setText("");
-        jtfCiudad.setText("");
-        jtfDireccion.setText("");
-        jtfTelefono.setText("");
+        limpiar();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -385,6 +391,44 @@ public class viewAgregarCliente extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jtfTelefonoKeyPressed
+
+    private void jbAgregarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbAgregarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jtfNombre.getText().trim().length() == 0 || jtfApellido.getText().trim().length() == 0 || jtfDNI.getText().trim().length() == 0 || jtfDireccion.getText().trim().length() == 0 || jtfCiudad.getText().trim().length() == 0 || jtfTelefono.getText().trim().length() == 0) {
+                mensaje("Faltan rellenar campos.");
+            } else {
+                agregarCliente();
+            }
+        }
+    }//GEN-LAST:event_jbAgregarKeyPressed
+
+    private void jtfDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDNIKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfDNIKeyTyped
+
+    private void jtfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfTelefonoKeyTyped
+
+    private void jbLimpiarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbLimpiarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            limpiar();
+        }
+    }//GEN-LAST:event_jbLimpiarKeyPressed
+
+    private void jbSalirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbSalirKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dispose();
+        }
+    }//GEN-LAST:event_jbSalirKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
