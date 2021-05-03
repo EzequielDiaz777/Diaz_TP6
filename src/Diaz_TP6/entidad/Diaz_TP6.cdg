@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Diaz_TP6">
+  <ClassDiagramComponents>
+    <Class name="Diaz_TP6" package="diaz_tp6" visibility="public" xPosition="130.0" yPosition="491.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="String[]" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Directorio" package="diaz_tp6" visibility="public" xPosition="38.0" yPosition="201.0">
+      <Fields>
+        <Field name="directorio" type="TreeMap&lt;String, Cliente&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="agregarCliente" returnType="Persona" visibility="public">
+          <Argument type="String" name="telefono"/>
+          <Argument type="Persona" name="persona"/>
+        </Method>
+        <Method name="buscarCliente" returnType="String" visibility="public">
+          <Argument type="String" name="telefono"/>
+        </Method>
+        <Method name="buscarTelefono" returnType="String" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="buscarClientes" returnType="String" visibility="public">
+          <Argument type="String" name="ciudad"/>
+        </Method>
+        <Method name="borrarCliente" returnType="String" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="" visibility="public" xPosition="552.0" yPosition="96.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="dni" type="String" visibility="private"/>
+        <Field name="domicilio" type="String" visibility="private"/>
+        <Field name="ciudad" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="getDni" returnType="String" visibility="public"/>
+        <Method name="getDomicilio" returnType="String" visibility="public"/>
+        <Method name="getCiudad" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="String" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setApellido" returnType="String" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="setDni" returnType="String" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="setDomicilio" returnType="String" visibility="public">
+          <Argument type="String" name="domicilio"/>
+        </Method>
+        <Method name="setCiudad" returnType="String" visibility="public">
+          <Argument type="String" name="ciudad"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ViewMenu" package="" visibility="public" xPosition="181.0" yPosition="692.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ViewBuscarClientes" package="" visibility="public" xPosition="476.0" yPosition="764.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="viewFormularioAgregarCliente" package="" visibility="public" xPosition="492.0" yPosition="659.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="" source="ViewMenu" target="ViewBuscarClientes" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="directorio" source="ViewMenu" target="Cliente" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="ViewMenu" target="viewFormularioAgregarCliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="lista" source="diaz_tp6.Directorio" target="Cliente" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
