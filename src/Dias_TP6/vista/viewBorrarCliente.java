@@ -41,7 +41,6 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
                         try{
                         String DNI = jtfDNI.getText();
                         TreeMap<String,Cliente> cliente = directorio.borrarCliente(DNI);
-                        System.out.println(cliente.firstKey());
                         jtfNombre.setText(cliente.get(cliente.firstKey()).getNombre());
                         jtfApellido.setText(cliente.get(cliente.firstKey()).getApellido());
                         jtfCiudad.setText(cliente.get(cliente.firstKey()).getCiudad());
