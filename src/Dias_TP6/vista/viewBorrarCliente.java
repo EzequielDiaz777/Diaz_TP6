@@ -41,6 +41,7 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
                         try{
                         String DNI = jtfDNI.getText();
                         TreeMap<String,Cliente> cliente = directorio.borrarCliente(DNI);
+                        System.out.println(cliente.firstKey());
                         jtfNombre.setText(cliente.get(cliente.firstKey()).getNombre());
                         jtfApellido.setText(cliente.get(cliente.firstKey()).getApellido());
                         jtfCiudad.setText(cliente.get(cliente.firstKey()).getCiudad());
@@ -53,15 +54,27 @@ public class viewBorrarCliente extends javax.swing.JInternalFrame {
                         jtfDNI.requestFocus();
                         }catch(NullPointerException npe){
                             mensaje("El cliente con el DNI " + jtfDNI.getText() + " no existe en el directorio.");
+                            limpiarTodo();
                             jtfDNI.requestFocus();
                         }
                         break;
                     case 1:
+                        limpiarTodo();
                         break;
                 }
     }
     public void limpiar(){
         jtfDNI.setText("");
+    }
+    public void limpiarTodo(){
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText("");
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText("");
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -9,48 +9,39 @@ public class Diaz_TP6 {
         Cliente Beatriz = new Cliente("Beatriz", "Hernando", "5919535", "Araoz 636", "CABA");
         Cliente Fabricio = new Cliente("Fabricio", "Molina", "37716732", "Pringles 231", "San Luis");
         Directorio lista = new Directorio();
-//        lista.agregarCliente("2657312733", Federico);
-//        lista.agregarCliente("2657312733", Federico);
+        lista.agregarCliente("2657312733", Federico);
         lista.agregarCliente("1132185230", Ezequiel);
-//        lista.agregarCliente("2657312732", Lautaro);
-//        lista.agregarCliente("1159481383", Beatriz);
-//        lista.agregarCliente("2664312733", Fabricio);
-        lista.agregarCliente("1132185326", Ezequiel);
+        lista.agregarCliente("2657312732", Lautaro);
+        lista.agregarCliente("1159481383", Beatriz);
+        lista.agregarCliente("2664312733", Fabricio);
+//        lista.agregarCliente("1132185326", Ezequiel);
 //        lista.buscarCliente("2657312733");
-        lista.buscarCliente("1132185230");
-        lista.buscarCliente("1132185326");
-        if(lista.borrarCliente("34229421")==null){
-              System.out.println("Este cliente no existe en la lista.");
-          }
+//        lista.buscarCliente("1132185230");
+//        lista.buscarCliente("1132185326");
 //        lista.buscarCliente("2657312732");
 //        lista.buscarCliente("2657312736");
 //        lista.buscarCliente("1159481383");
 //        lista.buscarCliente("2664312733");
-        lista.buscarClientes("San Luis");
+//        lista.buscarClientes("San Luis");
 //        lista.buscarClientes("Mendoza");
 //        lista.buscarClientes("La Punta");
 //        lista.buscarClientes("CABA");
 //        lista.buscarTelefono("Cruceño");
-        lista.buscarTelefono("Diaz");
+//        lista.buscarTelefono("Diaz");
 //        lista.buscarTelefono("Saucedo");
 //        lista.buscarTelefono("Hernando");
 //        lista.buscarTelefono("Molina");
 //        lista.buscarTelefono("Acevedo");
-//        lista.borrarCliente("5919535");
+        lista.borrarCliente("5919535");
         lista.borrarCliente("34229421");
-//        lista.borrarCliente("34229421");
-//        lista.borrarCliente("5919535");
-//        lista.borrarCliente("37716732");
-//        lista.borrarCliente("37716733");
-//        lista.borrarCliente("37716736");
-//        lista.borrarCliente("37716731");
+        lista.borrarCliente("37716731");
+        lista.borrarCliente("37716733");
+        lista.borrarCliente("37716732");
+        lista.borrarCliente("1");
 //        lista.buscarClientes("San Luis");
 //        lista.buscarClientes("Mendoza");
 //        lista.buscarClientes("La Punta");
 //        lista.buscarClientes("CABA");
 //        lista.buscarTelefono("Diaz");
-          if(lista.borrarCliente("34229421")!=null){
-              System.out.println("Este cliente no existe en la lista.");
-          }
     }
 }

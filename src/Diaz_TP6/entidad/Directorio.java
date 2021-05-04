@@ -90,11 +90,18 @@ public class Directorio {
             if (directorio.get(arreglo[i]).getDni().equals(dni)) {
                 System.out.println("El cliente " + (directorio.get(arreglo[i]).getApellido())+ " ha sido eliminado.");
                 tele += arreglo[i] + "/ ";
+                System.out.println(tele);
                 cliente =directorio.get(arreglo[i]);
                 directorio.remove(arreglo[i]);
             }
         }
-        clientes.put(tele,cliente);
+        if(tele.contentEquals("")){
+            clientes.put(tele,cliente);
+        } else {
+        String telefono = tele.substring(0, tele.length()-2);
+        System.out.println(telefono);
+        clientes.put(telefono,cliente);
+        }
        return clientes;
     }
 }
